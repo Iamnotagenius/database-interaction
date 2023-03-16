@@ -1,0 +1,33 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="CRM">
+        <description>
+            Persistence unit for Hibernate
+        </description>
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>jabainitmo.database.Street</class>
+        <class>jabainitmo.database.House</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://172.17.0.2/forjava" />
+
+            <property name="jakarta.persistence.jdbc.user"
+                      value="postgres" />
+
+            <property name="jakarta.persistence.jdbc.password"
+                      value="123654" />
+
+            <property name="hibernate.hbm2ddl.auto"
+                      value="update" />
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

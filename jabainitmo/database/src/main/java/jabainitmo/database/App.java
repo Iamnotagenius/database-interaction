@@ -6,12 +6,14 @@ package jabainitmo.database;
 import java.sql.*;
 import java.time.LocalDate;
 
+import jabainitmo.database.hibernate.HibernateHouseContext;
+import jabainitmo.database.hibernate.HibernateStreetContext;
 import jabainitmo.database.jdbc.*;
 
 public class App {
     public static void main(String[] args) throws SQLException {
-        var houseCtx = new JdbcHouseContext();
-        var streetCtx = new JdbcStreetContext();
+        var houseCtx = new HibernateHouseContext();
+        var streetCtx = new HibernateStreetContext();
 
         System.out.println("Print all streets:");
         streetCtx.getAll().forEach(s -> System.out.println(s));
@@ -19,20 +21,30 @@ public class App {
         System.out.println("Print all houses:");
         houseCtx.getAll().forEach(h -> System.out.println(h));
 
-        var street = streetCtx.getById(3);
+        var street = streetCtx.getById(2);
         street.setName("Jaba av.");
         street.setPostIndex(255);
         streetCtx.update(street);
 
-        streetCtx.deleteById(2);
-
-        streetCtx.save(new Street(0, "LOL st.", 1337));
-        houseCtx.save(new House(0, "OOO KEK", LocalDate.now(), 5, HouseType.COMMERCIAL, streetCtx.getById(1)));
+        street = new Street();
+        street.setName("LMAO st.");
+        street.setPostIndex(1337);
+        streetCtx.save(street);
+        var house = new House();
+        house.setName("PAO KEK");
+        house.setDate(LocalDate.now());
+        house.setFloors(5);
+        house.setType(HouseType.COMMERCIAL);
+        house.setStreet(streetCtx.getById(1));
+        houseCtx.save(house);
 
         System.out.println("Print all streets after update:");
         streetCtx.getAll().forEach(s -> System.out.println(s));
 
         System.out.println("Print all houses after update:");
         houseCtx.getAll().forEach(h -> System.out.println(h));
+
+        System.out.println("Print all houses on street:");
+        houseCtx.getAllByStreetId(1).forEach(h -> System.out.println(h));
     }
 }

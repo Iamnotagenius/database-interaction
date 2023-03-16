@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jabainitmo.database.DbContext;
-import jabainitmo.database.Entity;
 
-public abstract class JdbcDbContext<T extends Entity> implements DbContext<T> {
+public abstract class JdbcDbContext<T extends JdbcEntity> implements DbContext<T> {
     protected static String ConnURL = "jdbc:postgresql://172.17.0.2/forjava?user=postgres&password=123654";
 
     public void save(T entity) throws SQLException {

@@ -1,12 +1,27 @@
 package jabainitmo.database;
 
+import jabainitmo.database.jdbc.JdbcEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Street implements Entity {
+@Entity
+@Table(name = "streets")
+public class Street implements JdbcEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Column(name = "post_index")
     private int postIndex;
+
+    public Street() {
+    }
 }

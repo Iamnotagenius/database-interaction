@@ -7,7 +7,10 @@ plugins {
     id("io.freefair.lombok") version "6.6.2"
 }
 
-dependencies { implementation("org.postgresql:postgresql:42.5.4") }
+dependencies {
+    implementation("org.postgresql:postgresql:42.5.4")
+    implementation("org.hibernate:hibernate-core:6.1.7.Final")
+}
 
 application {
     // Define the main class for the application.
