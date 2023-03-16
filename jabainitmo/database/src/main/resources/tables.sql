@@ -1,18 +1,16 @@
 CREATE TABLE
   streets (
-    id INTEGER GENERATED ALWAYS AS IDENTITY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    post_index INTEGER NOT NULL,
-    PRIMARY KEY (id)
+    post_index INTEGER NOT NULL
   );
 
 CREATE TABLE
   houses (
-    id INTEGER GENERATED ALWAYS AS IDENTITY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     date DATE,
     floors INTEGER NOT NULL,
-    type VARCHAR(10) DEFAULT 'Unknown',
-    street INTEGER references streets (id),
-    PRIMARY KEY (id)
+    type VARCHAR(11) DEFAULT 'Unknown',
+    street INTEGER references streets (id)
   );
