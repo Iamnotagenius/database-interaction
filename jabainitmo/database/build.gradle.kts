@@ -5,6 +5,7 @@
 plugins {
     id("jabainitmo.java-application-conventions")
     id("io.freefair.lombok") version "6.6.2"
+    id("me.champeau.jmh") version "0.7.0"
 }
 
 dependencies {
