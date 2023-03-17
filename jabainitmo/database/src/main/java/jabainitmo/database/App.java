@@ -3,17 +3,20 @@
  */
 package jabainitmo.database;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
 import jabainitmo.database.hibernate.HibernateHouseContext;
 import jabainitmo.database.hibernate.HibernateStreetContext;
 import jabainitmo.database.jdbc.*;
+import jabainitmo.database.mybatis.MyBatisHouseContext;
+import jabainitmo.database.mybatis.MyBatisStreetContext;
 
 public class App {
-    public static void main(String[] args) throws SQLException {
-        var houseCtx = new HibernateHouseContext();
-        var streetCtx = new HibernateStreetContext();
+    public static void main(String[] args) throws SQLException, IOException {
+        var houseCtx = new MyBatisHouseContext();
+        var streetCtx = new MyBatisStreetContext();
 
         System.out.println("Print all streets:");
         streetCtx.getAll().forEach(s -> System.out.println(s));

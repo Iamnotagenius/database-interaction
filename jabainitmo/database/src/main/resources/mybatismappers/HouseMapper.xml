@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jabainitmo.database.mybatis.HouseMapper">
+    <resultMap id="houseResultMap" type="House">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="date" column="date"/>
+        <result property="floors" column="floors"/>
+        <result property="type" column="type"/>
+        <association property="street" javaType="Street">
+            <id property="id" column="s_id"/>
+            <result property="name" column="s_name"/>
+            <result property="postIndex" column="post_index"/>
+        </association>
+    </resultMap>
+    <sql id="selectHouse">
+        select
+            H.id,
+            H.name,
+            H.date,
+            H.floors,
+            H.type,
+            S.id as s_id,
+            S.name as s_name,
+            S.post_index
+        from houses H
+        left join streets S on H.street = S.id
+    </sql>
+    <insert id="saveHouse" parameterType="House" useGeneratedKeys="true" keyProperty="id">
+        insert into houses(name, date, floors, type, street)
+        values (#{name}, #{date}, #{floors}, #{type}, #{street.id})
+    </insert>
+    <delete id="deleteHouse">
+        delete from houses where id = #{id}
+    </delete>
+    <delete id="deleteAllHouses">
+        delete from houses
+    </delete>
+    <update id="updateHouse" parameterType="House">
+        update houses set
+            name = #{name},
+            date = #{date},
+            floors = #{floors},
+            type = #{type},
+            street = #{street.id}
+        where id = #{id}
+    </update>
+    <select id="selectHouse" resultMap="houseResultMap">
+        <include refid="selectHouse"/>
+        where id = #{id}
+    </select>
+    <select id="selectAllHouses" resultMap="houseResultMap">
+        <include refid="selectHouse"/>
+    </select>
+    <select id="selectAllHousesOnStreet" resultMap="houseResultMap">
+        <include refid="selectHouse"/>
+        where S.id = #{id}
+    </select>
+</mapper>

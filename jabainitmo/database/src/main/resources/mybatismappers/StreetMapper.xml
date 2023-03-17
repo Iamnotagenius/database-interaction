@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jabainitmo.database.mybatis.StreetMapper">
+    <resultMap id="streetResultMap" type="Street">
+        <result property="postIndex" column="post_index" />
+    </resultMap>
+    <insert id="saveStreet" parameterType="Street" useGeneratedKeys="true" keyProperty="id">
+        insert into streets(name, post_index)
+        values (#{name}, #{postIndex})
+    </insert>
+    <delete id="deleteStreet">
+        delete from streets where id = #{id}
+    </delete>
+    <delete id="deleteAllStreets">
+        delete from streets
+    </delete>
+    <update id="updateStreet" parameterType="Street">
+        update streets set
+            name = #{name},
+            post_index = #{postIndex}
+        where id = #{id}
+    </update>
+    <select id="selectStreet" resultMap="streetResultMap">
+        select * from streets where id = #{id}
+    </select>
+    <select id="selectAllStreets" resultMap="streetResultMap">
+        select * from streets
+    </select>
+</mapper>

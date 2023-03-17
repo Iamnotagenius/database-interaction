@@ -10,6 +10,7 @@ plugins {
 dependencies {
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("org.hibernate:hibernate-core:6.1.7.Final")
+    implementation("org.mybatis:mybatis:3.5.13")
 }
 
 application {
