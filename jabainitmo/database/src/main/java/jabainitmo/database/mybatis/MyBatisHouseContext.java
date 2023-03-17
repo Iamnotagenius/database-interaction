@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import jabainitmo.database.DbContext;
 import jabainitmo.database.House;
 import jabainitmo.database.HouseDbContext;
 

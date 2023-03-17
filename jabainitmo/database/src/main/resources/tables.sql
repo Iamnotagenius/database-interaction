@@ -12,5 +12,5 @@ CREATE TABLE
     date DATE,
     floors INTEGER NOT NULL,
     type VARCHAR(11) DEFAULT 'Unknown',
-    street INTEGER references streets (id)
+    street INTEGER references streets (id) ON DELETE SET NULL
   );

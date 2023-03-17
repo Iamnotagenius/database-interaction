@@ -33,12 +33,28 @@ public class HibernateStreetContext implements DbContext<Street> {
 
     @Override
     public void deleteById(long id) throws SQLException {
-        entityManager.remove(entityManager.getReference(Street.class, id));
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.remove(entityManager.getReference(Street.class, id));
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
     public void deleteAll() throws SQLException {
-        entityManager.createQuery("DELETE FROM Street").executeUpdate();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.createQuery("DELETE FROM Street").executeUpdate();
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override

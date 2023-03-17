@@ -34,7 +34,7 @@ public abstract class JdbcDbContext<T extends JdbcEntity> implements DbContext<T
 
     public void deleteAll() throws SQLException {
         try (Connection connection = DriverManager.getConnection(ConnURL);
-                PreparedStatement statement = prepareStatement(connection, "TRUNCATE TABLE [table]")) {
+                PreparedStatement statement = prepareStatement(connection, "TRUNCATE TABLE [table] CASCADE")) {
             statement.executeUpdate();
         }
     }
